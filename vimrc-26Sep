@@ -1,0 +1,104 @@
+set encoding=utf-8            " for python code
+set nocompatible              " required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+
+" rectify problems with folding  
+Plugin 'tmhedberg/SimpylFold'
+
+" autoindent for python code
+Plugin 'vim-scripts/indentpython.vim'
+
+" syntax highlighting
+Plugin 'vim-syntastic/syntastic'
+
+" PEP 8 checking
+Plugin 'nvie/vim-flake8'
+
+" Color scheme    see script below to choise
+" when running gui or not
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+" PowerLine
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+
+"split navigations
+" :sp  :vs
+nnoremap <C-J> <C-W><C-J>   " cntr J   Below
+nnoremap <C-K> <C-W><C-K>   " cntr K   Above
+nnoremap <C-L> <C-W><C-L>   " cntr L   right
+nnoremap <C-H> <C-W><C-H>   " cntr H   left
+
+
+
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za   
+
+"  see doctring when folding
+let g:SimpylFold_docstring_preview=1
+
+
+
+
+
+" PEP 8 indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+
+au BufNewFile,BufRead *.js, *.html, *.css *.yml
+    \ set tabstop=2  |   
+    \ set softtabstop=2 | 
+    \ set shiftwidth=2  |   
+
+
+
+" make your code look pretty
+let python_highlight_all=1
+syntax on
+
+
+"    au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+
+
+if has('gui_running')
+   set background=dark
+   colorscheme solarized
+else
+  colorscheme zenburn
+endif
+call togglebg#map("<F5>")  " solarized has dark and light
+
+
+set nu
